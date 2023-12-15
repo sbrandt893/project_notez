@@ -75,8 +75,8 @@ class MyShapeBorder extends ShapeBorder {
   @override
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
     return Path()
-      ..moveTo(rect.right, rect.bottom - 10)
-      ..lineTo(rect.right, rect.bottom)
+      // ..moveTo(rect.right, rect.bottom - 10)
+      // ..lineTo(rect.right, rect.bottom)
       // ..lineTo(rect.left, rect.bottom)
       // ..lineTo(rect.left, rect.top)
       // ..lineTo(rect.right, rect.top + 30)
@@ -85,13 +85,13 @@ class MyShapeBorder extends ShapeBorder {
       // ..lineTo(rect.left, rect.bottom)
       // ..lineTo(rect.right, rect.bottom)
       // ..lineTo(rect.right, rect.top)
+      // ..close();
+      ..moveTo(rect.left, rect.top)
+      ..lineTo(rect.left, rect.top + 50)
+      ..lineTo(rect.left + 50, rect.bottom)
+      ..lineTo(rect.right, rect.bottom)
+      ..lineTo(rect.right, rect.top)
       ..close();
-    // ..moveTo(rect.left, rect.top)
-    // ..lineTo(rect.left, rect.top + 50)
-    // ..lineTo(rect.left + 50, rect.bottom)
-    // ..lineTo(rect.right, rect.bottom)
-    // ..lineTo(rect.right, rect.top)
-    // ..close();
   }
 
   @override
