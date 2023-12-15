@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_notez/backend/interfaces/i_app_theme.dart';
 
-class HufflepaffStyle extends IAppTheme {
+class HufflepaffStyle implements IAppTheme {
   HufflepaffStyle() : super();
 
   @override
