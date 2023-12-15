@@ -1,6 +1,6 @@
 import 'package:project_notez/backend/interfaces/i_translation.dart';
 
-class EnTranslation extends ITranslation {
+class EnTranslation implements ITranslation {
   EnTranslation() : super();
 
   @override
