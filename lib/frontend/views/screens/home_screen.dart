@@ -1,107 +1,110 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project_notez/backend/models/appstate.dart';
+import 'package:project_notez/backend/models/app_state.dart';
+import 'package:project_notez/backend/models/note.dart';
 import 'package:project_notez/frontend/animations/fab_menu.dart';
 import 'package:project_notez/frontend/routes/app_router.dart';
-import 'package:project_notez/logic/provider/appstate_provider.dart';
+import 'package:project_notez/frontend/views/widgets/my_shape_border_z.dart';
+import 'package:project_notez/logic/provider/app_state_provider.dart';
+import 'package:project_notez/logic/provider/notes_provider.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Appstate appstate = ref.watch(appstateProvider);
+    final AppState appState = ref.watch(appStateProvider);
     Size size = MediaQuery.of(context).size;
+    List<Note> notes = ref.watch(notesProvider);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.only(left: 32),
-          child: Text(
-            appstate.translation.titleHome,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 42,
-              letterSpacing: 3,
-            ),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => ref.read(appstateProvider.notifier).changeTranslation(),
-            child: Text(
-              appstate.translation.languageCode,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-          ),
-          IconButton(
-            onPressed: () => Navigator.pushNamed(context, '${Routes.settings}'),
-            icon: const Icon(Icons.settings, size: 32),
-            color: appstate.appTheme.appbarIconColor,
-          ),
-        ],
-        // create a shape with linear
-        shape: MyShapeBorder(),
-      ),
-      body: Container(
-          height: size.height,
-          width: size.width,
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  Text(
-                    appstate.translation.subTitleHome,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                ],
+    return SafeArea(
+      child: Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            toolbarHeight: 69,
+            title: Padding(
+              padding: const EdgeInsets.only(left: 60, top: 20),
+              child: Text(
+                appState.translation.titleHome,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 32,
+                ),
               ),
-              FabMenu()
+            ),
+            actions: [
+              IconButton(
+                icon: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(height: 36, width: 36, child: appState.translation.flagIcon),
+                    const SizedBox(width: 3),
+                    Text(
+                      appState.translation.languageCode,
+                      style: TextStyle(
+                        color: appState.appTheme.appbarIconColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                onPressed: () => ref.read(appStateProvider.notifier).changeTranslation(),
+                tooltip: appState.translation.languageCode,
+              ),
+              IconButton(
+                onPressed: () => Navigator.pushReplacementNamed(context, '${Routes.settings}'),
+                icon: const Icon(Icons.settings, size: 32),
+                color: appState.appTheme.appbarIconColor,
+              ),
             ],
-          )),
+            // create a shape with linear
+            shape: const MyShapeBorderZ(),
+          ),
+          body: Container(
+              height: size.height,
+              width: size.width,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: appState.appTheme.backgroundImage.image,
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(appState.appTheme.primaryColor, BlendMode.multiply),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 75),
+                child: Column(
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      child: Text(
+                        appState.translation.subTitleHome,
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: appState.appTheme.subTitleColor),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 5,
+                      child: ListView.builder(
+                          padding: const EdgeInsets.all(20),
+                          itemCount: notes.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return SizedBox(
+                              height: 150,
+                              child: Card(
+                                child: ListTile(
+                                  title: Text(notes[index].title),
+                                  onTap: () {
+                                    ref.read(notesProvider.notifier).remove(notes[index].id);
+                                  },
+                                ),
+                              ),
+                            );
+                          }),
+                    ),
+                  ],
+                ),
+              )),
+          floatingActionButton: const FabMenu()),
     );
-  }
-}
-
-class MyShapeBorder extends ShapeBorder {
-  const MyShapeBorder();
-
-  @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.zero;
-
-  @override
-  Path getInnerPath(Rect rect, {TextDirection? textDirection}) => Path();
-
-  @override
-  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    return Path()
-      // ..moveTo(rect.right, rect.bottom - 10)
-      // ..lineTo(rect.right, rect.bottom)
-      // ..lineTo(rect.left, rect.bottom)
-      // ..lineTo(rect.left, rect.top)
-      // ..lineTo(rect.right, rect.top + 30)
-      // ..lineTo(rect.left + 75, rect.top + 30)
-      // ..lineTo(rect.left, rect.bottom - 20)
-      // ..lineTo(rect.left, rect.bottom)
-      // ..lineTo(rect.right, rect.bottom)
-      // ..lineTo(rect.right, rect.top)
-      // ..close();
-      ..moveTo(rect.left, rect.top)
-      ..lineTo(rect.left, rect.top + 50)
-      ..lineTo(rect.left + 50, rect.bottom)
-      ..lineTo(rect.right, rect.bottom)
-      ..lineTo(rect.right, rect.top)
-      ..close();
-  }
-
-  @override
-  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
-    // Keine benutzerdefinierte Zeichnung erforderlich
-  }
-
-  @override
-  ShapeBorder scale(double t) {
-    // TODO: implement scale
-    throw UnimplementedError();
   }
 }

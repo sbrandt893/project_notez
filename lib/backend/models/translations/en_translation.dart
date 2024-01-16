@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:project_notez/backend/interfaces/i_translation.dart';
 
 class EnTranslation implements ITranslation {
@@ -17,4 +18,7 @@ class EnTranslation implements ITranslation {
   String get darkModeSwitchDescription => 'DarkMode on/off';
   @override
   String get appThemeSwitchDescription => 'Switch AppTheme';
+
+  @override
+  Image get flagIcon => Image.asset('assets/images/en.png');
 }

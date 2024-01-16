@@ -9,19 +9,29 @@ class LegendStyle implements IAppTheme {
   @override
   String get fontFamily => 'Hyperjump-Regular';
   @override
-  Color get primaryColor => Colors.deepPurple;
+  Color get primaryColor => const Color.fromARGB(255, 93, 0, 148);
   @override
-  Color get fabMenuMainButtonColor => Colors.deepPurple.shade900;
+  Color get fabMenuMainButtonColor => const Color.fromARGB(255, 73, 0, 128);
   @override
-  Color get fabMenuFirstSubButtonColor => Colors.deepPurple.shade800;
+  Color get fabMenuFirstSubButtonColor => const Color.fromARGB(255, 63, 0, 118);
   @override
-  Color get fabMenuSecondSubButtonColor => Colors.deepPurple.shade600;
+  Color get fabMenuSecondSubButtonColor => const Color.fromARGB(255, 53, 0, 108);
   @override
-  Color get fabMenuThirdSubButtonColor => Colors.deepPurple.shade400;
+  Color get fabMenuThirdSubButtonColor => const Color.fromARGB(255, 43, 0, 98);
   @override
   Color get fabMenuIconColor => Colors.white;
   @override
   Color get appbarIconColor => Colors.white;
   @override
-  Color get appbarBackgroundColor => Colors.deepPurple.shade900;
+  Color get appbarBackgroundColor => const Color.fromARGB(255, 93, 0, 148);
+  @override
+  Image get backgroundImage => Image.asset('assets/images/thunder.gif');
+  @override
+  Color get subTitleColor => Colors.white;
+  // @override
+  // ThemeData get themeData => ThemeData(
+  //       fontFamily: fontFamily,
+  //       primaryColor: primaryColor,
+  //       useMaterial3: true,
+  //     );
 }

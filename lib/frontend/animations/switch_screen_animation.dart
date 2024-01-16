@@ -50,6 +50,26 @@ class SwitchScreenAnimation {
     );
   }
 
+// ScaleTransition with custom alignment (rückwärts)
+  static Route createReverseScaleRoute({required Widget page}) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => Container(), // Dummy-Seite
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return ScaleTransition(
+          alignment: Alignment.topLeft, // Umgekehrte Richtung der Animation
+          scale: Tween<double>(
+            begin: 1.0,
+            end: 0.0,
+          ).animate(CurvedAnimation(
+            parent: animation,
+            curve: Curves.easeInOutBack,
+          )),
+          child: child,
+        );
+      },
+    );
+  }
+
   // RotationTransition
   static Route createRotationRoute({required Widget page}) {
     return PageRouteBuilder(

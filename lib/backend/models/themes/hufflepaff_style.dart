@@ -9,19 +9,23 @@ class HufflepaffStyle implements IAppTheme {
   @override
   String get fontFamily => 'Comic-Sans-MS';
   @override
-  Color get primaryColor => Colors.yellow.shade700;
+  Color get primaryColor => const Color.fromARGB(255, 193, 183, 133);
   @override
-  Color get fabMenuMainButtonColor => Colors.yellow.shade800;
+  Color get fabMenuMainButtonColor => const Color.fromARGB(255, 200, 155, 0);
   @override
-  Color get fabMenuFirstSubButtonColor => Colors.yellow.shade700;
+  Color get fabMenuFirstSubButtonColor => const Color.fromARGB(255, 230, 185, 0);
   @override
-  Color get fabMenuSecondSubButtonColor => Colors.yellow.shade600;
+  Color get fabMenuSecondSubButtonColor => const Color.fromARGB(255, 220, 175, 0);
   @override
-  Color get fabMenuThirdSubButtonColor => Colors.yellow.shade500;
+  Color get fabMenuThirdSubButtonColor => const Color.fromARGB(255, 210, 165, 0);
   @override
   Color get fabMenuIconColor => Colors.black;
   @override
   Color get appbarIconColor => Colors.black;
   @override
-  Color get appbarBackgroundColor => Colors.yellow.shade800;
+  Color get appbarBackgroundColor => const Color.fromARGB(255, 200, 155, 0);
+  @override
+  Image get backgroundImage => Image.asset('assets/images/parchment.jpg');
+  @override
+  Color get subTitleColor => Colors.black;
 }
