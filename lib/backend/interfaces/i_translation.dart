@@ -10,6 +10,7 @@ abstract class ITranslation {
   String get subTitleSettings;
   String get darkModeSwitchDescription;
   String get appThemeSwitchDescription;
+  String get notes;
   Image get flagIcon;
 
   factory ITranslation.fromString(String? string) {

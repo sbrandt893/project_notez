@@ -2,9 +2,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_notez/backend/models/app_state.dart';
-import 'package:project_notez/backend/models/note.dart';
+import 'package:project_notez/frontend/routes/app_router.dart';
 import 'package:project_notez/logic/provider/app_state_provider.dart';
-import 'package:project_notez/logic/provider/notes_provider.dart';
 
 class FabMenu extends ConsumerStatefulWidget {
   const FabMenu({super.key});
@@ -81,10 +80,11 @@ class FabMenuState extends ConsumerState<FabMenu> with SingleTickerProviderState
               onClick: () {
                 // animationController!.reverse();
                 log('First Button');
-                ref.read(notesProvider.notifier).add(Note(
-                      title: 'Hallo Welt',
-                      description: 'Das ist eine Beschreibung',
-                    ));
+                Navigator.pushNamed(context, '${Routes.note}');
+                // ref.read(notesProvider.notifier).add(Note(
+                //       title: 'Hallo Welt',
+                //       description: 'Das ist eine Beschreibung',
+                //     ));
               },
             ),
           ),

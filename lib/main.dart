@@ -7,9 +7,6 @@ import 'package:project_notez/logic/provider/app_state_provider.dart';
 import 'package:uuid/uuid.dart';
 
 void main() {
-  var uuid = Uuid().v4();
-  log('uuid: $uuid');
-
   runApp(
     ProviderScope(
       child: MyApp(

@@ -18,6 +18,8 @@ class EnTranslation implements ITranslation {
   String get darkModeSwitchDescription => 'DarkMode on/off';
   @override
   String get appThemeSwitchDescription => 'Switch AppTheme';
+  @override
+  String get notes => 'Notes';
 
   @override
   Image get flagIcon => Image.asset('assets/images/en.png');

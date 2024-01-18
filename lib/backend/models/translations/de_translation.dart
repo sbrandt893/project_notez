@@ -18,7 +18,8 @@ class DeTranslation implements ITranslation {
   String get darkModeSwitchDescription => 'DarkMode ein/ausschalten';
   @override
   String get appThemeSwitchDescription => 'AppTheme wechseln';
-
+  @override
+  String get notes => 'Notizen';
   @override
   Image get flagIcon => Image.asset('assets/images/de.png');
 }
